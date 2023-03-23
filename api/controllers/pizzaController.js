@@ -1,6 +1,6 @@
 let Pizza = require('../models/pizzaModel');
 
-let pizzas = [new Pizza("Margarita",12),new Pizza("bbq",10),new Pizza("Hawai",11)]
+let pizzas = [new Pizza("Margarita",12),new Pizza("bbq",10),new Pizza("Hawai",11),new Pizza("Ham",11),new Pizza("Calzone",14),new Pizza("Salmon",11)]
 
 exports.pizzaDetails = function (req,res){
     let id  =req.params.pizza_id;
@@ -32,10 +32,10 @@ exports.deletePizza = function (req,res){
 
 exports.createPizza = function (req,res){
     let id = pizzas.length;
-    let name = req.body.pizza_name;
+    let name = req.body.name;
     let price = req.body.price;
     if (name==undefined || price == undefined){
-        res.status(404).json({"error":"invalid body format", "valid_keys":["pizza_name","price"]});
+        res.status(404).json({"error":"invalid body format", "valid_keys":["name","price"]});
     }
     else{
         let pizza = new Pizza(name,price);

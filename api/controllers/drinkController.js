@@ -32,10 +32,10 @@ exports.deleteDrink = function (req,res){
 
 exports.createDrink = function (req,res){
     let id = drinks.length;
-    let name = req.body.drink_name;
+    let name = req.body.name;
     let price = req.body.price;
     if (name==undefined || price == undefined){
-        res.status(404).json({"error":"invalid body format", "valid_keys":["drink_name","price"]});
+        res.status(404).json({"error":"invalid body format", "valid_keys":["name","price"]});
     }
     else{
         let drink = new Drink(name,price);
