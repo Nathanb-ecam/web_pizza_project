@@ -4,7 +4,7 @@ let router = express.Router();
 
 let pizzaController = require('./controllers/pizzaController');
 let drinkController = require('./controllers/drinkController');
-let formulaController = require('./controllers/formulaController');
+let menuController = require('./controllers/menuController');
 
 
 router.get('/',(req,res)=>{
@@ -28,9 +28,9 @@ router.post('/drink',drinkController.createDrink);
 
 
 // formulas
-router.get('/formula/:formula_id',formulaController.formulaDetails);
-router.get('/formulas/',formulaController.listFormulas);
-router.delete('/formula/:formula_id',formulaController.deleteFormula);
-router.post('/formula',formulaController.createFormula);
+router.get('/menus/',menuController.listMenus);
+router.get('/menu/:menu_id',menuController.menuDetails);
+router.delete('/menu/:menu_id',menuController.deleteMenu);
+router.post('/menu',menuController.createMenu);
 
 module.exports = router;
