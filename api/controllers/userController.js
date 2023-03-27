@@ -51,14 +51,18 @@ exports.createUser = function (req,res){
 
 // at route /users
 exports.authentifyUser = function(req,res){
+    let found = false;
     let name = req.body.name;
     let password = req.body.password;
-
+    let user = new User(name,password,0);
     for (const user of users){
         if (user.name==name&& user.password == password){
-            res.json({"Authenticated":true});
+            found=true;
+            res.json(user);
             break;
         }
     }
-    res.json({"Authenticated":false});
+    if (!found){
+        res.json({"Authenticated":false});
+    }
 }
