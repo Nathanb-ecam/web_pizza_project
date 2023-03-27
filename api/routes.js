@@ -8,6 +8,7 @@ let sauceController = require('./controllers/sauceController');
 let extraController = require('./controllers/extraController');
 let drinkController = require('./controllers/drinkController');
 let menuController = require('./controllers/menuController');
+let userController = require('./controllers/userController');
 
 
 router.get('/',(req,res)=>{
@@ -49,10 +50,17 @@ router.delete('/drink/:drink_id',drinkController.deleteDrink);
 router.post('/drink',drinkController.createDrink);
 
 
-// formulas
+// menu
 router.get('/menus/',menuController.listMenus);
 router.get('/menu/:menu_id',menuController.menuDetails);
 router.delete('/menu/:menu_id',menuController.deleteMenu);
 router.post('/menu',menuController.createMenu);
+
+// user
+router.get('/users/',userController.listUsers);
+router.get('/user/:user_id',userController.userDetails);
+router.delete('/user/:user_id',userController.deleteUser);
+router.post('/user',userController.createUser);
+router.post('/users',userController.authentifyUser);
 
 module.exports = router;
