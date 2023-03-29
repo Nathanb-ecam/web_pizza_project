@@ -9,8 +9,8 @@ const Drink = sequelize.define('drink', {
                 allowNull: false,
                 primaryKey: true
             },
-            name: { type: Sequelize.STRING, allowNull: false },
-            price: { type: Sequelize.INTEGER, allowNull: false }
+            drink_name: { type: Sequelize.STRING, allowNull: false },
+            price: { type: Sequelize.FLOAT, allowNull: false }
             
 })
 

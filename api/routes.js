@@ -35,32 +35,36 @@ router.get('/extras/',extraController.extraList);
 router.delete('/extra/:extra_id',extraController.deleteExtra);
 router.post('/extra',extraController.createExtra);
 
-// pizza
-router.get('/pizza/:pizza_id',pizzaController.pizzaDetails);
-router.get('/pizzas/',pizzaController.pizzaList);
-router.delete('/pizza/:pizza_id',pizzaController.deletePizza);
-router.post('/pizza',pizzaController.createPizza);
 
 
 
-// drink
-router.get('/drink/:drink_id',drinkController.drinkDetails);
-router.get('/drinks/',drinkController.drinkList);
-router.delete('/drink/:drink_id',drinkController.deleteDrink);
-router.post('/drink',drinkController.createDrink);
 
 
-// menu
-router.get('/menus/',menuController.listMenus);
-router.get('/menu/:menu_id',menuController.menuDetails);
-router.delete('/menu/:menu_id',menuController.deleteMenu);
-router.post('/menu',menuController.createMenu);
 
+// updated routes
 // user
 router.get('/users/',userController.listUsers);
 router.get('/user/:user_id',userController.searchUser);
 router.delete('/user/:user_id',userController.deleteUser);
-router.post('/user',userController.createUser);
-// router.post('/users',userController.authentifyUser);
+router.post('/users',userController.createUser);
+
+// drink
+router.get('/drinks/',drinkController.listDrinks);
+router.get('/drink/:drink_id',drinkController.searchDrink);
+router.delete('/drink/:drink_id',drinkController.deleteDrink);
+router.post('/drinks',drinkController.createDrink);
+
+// menu
+router.get('/menus/',menuController.listMenus);
+router.get('/menu/:menu_id',menuController.searchMenu);
+router.delete('/menu/:menu_id',menuController.deleteMenu);
+router.post('/menus',menuController.createMenu);
+
+// pizza
+router.get('/pizzas/',pizzaController.listPizzas);
+router.get('/pizza/:pizza_id',pizzaController.searchPizza);
+router.delete('/pizza/:pizza_id',pizzaController.deletePizza);
+router.post('/pizzas',pizzaController.createPizza);
+
 
 module.exports = router;

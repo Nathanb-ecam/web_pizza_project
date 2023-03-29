@@ -1,45 +1,41 @@
 let Drink = require('../models/drinkModel');
 
-let drinks = [new Drink("Coca cola",2),new Drink("Water",1),new Drink("Sprite",2)]
 
-exports.drinkDetails = function (req,res){
-    let id  =req.params.drink_id;
-    if (id >=0 && id < drinks.length){
-        res.json({id:drinks[id]});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
+
+exports.listDrinks = function (req,res){
+    Drink.findAll({ attributes: ['drink_id','drink_name', 'price']} )
+        .then(data => {
+            // console.log(data.toJSON());
+            res.json(data);
+        })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
-exports.drinkList = function (req,res){
-    res.json({"drinks":drinks});
+exports.searchDrink = function(req,res){
+    Drink.findOne({ where: { drink_id: req.params.drink_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
+exports.createDrink = async function(req,res){
+    let drink = Drink.build({ drink_name: req.body.drink_name,price:req.body.price })
+    // save object in DB
+    await drink.save()
+        .then(data => {
+            res.json(data);
+    })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
 
 exports.deleteDrink = function (req,res){
-    let id = req.params.drink_id;
-    
-    if (id >=0 && id < drinks.length){
-        let drinkToRemove = drinks[id];
-        drinks.splice(id,1);
-        res.json({id:drinkToRemove});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
+    Drink.destroy({ where: { drink_id: req.params.drink_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message}))
 }
 
-exports.createDrink = function (req,res){
-    let id = drinks.length;
-    let name = req.body.name;
-    let price = req.body.price;
-    if (name==undefined || price == undefined){
-        res.status(404).json({"error":"invalid body format", "valid_keys":["name","price"]});
-    }
-    else{
-        let drink = new Drink(name,price);
-        drinks.push(drink);
-        res.json({id:drink});
-    }
-}
+
