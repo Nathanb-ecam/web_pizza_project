@@ -1,46 +1,38 @@
-let Sauce = require('../models/sauceModel');
+let Sauce = require('../models/SauceModel');
 
-let sauces = [new Sauce("Mayo",0.1),new Sauce("Andalouse",0.5),new Sauce("Ketchup",1.1)]
 
-exports.sauceDetails = function (req,res){
-    let sauce_id  =req.params.sauce_id;
-    if (sauce_id >=0 && sauce_id < sauces.length){
-        res.json({sauce_id:sauces[sauce_id]});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
-    
-    
+exports.listSauce = function (req,res){
+    Sauce.findAll({ attributes: ['sauce_id','sauce_name', 'price']} )
+        .then(data => {
+            // console.log(data.toJSON());
+            res.json(data);
+        })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
-exports.sauceList = function (req,res){
-    res.json({"sauces":sauces});
+exports.searchSauce = function(req,res){
+    Sauce.findOne({ where: { sauce_id: req.params.sauce_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
+exports.createSauce = async function(req,res){
+    let sauce = Sauce.build({ sauce_name: req.body.sauce_name, price: req.body.price  })
+    // save object in DB
+    await sauce.save()
+        .then(data => {
+            res.json(data);
+    })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
 
 exports.deleteSauce = function (req,res){
-    let id = req.params.sauce_id;
-    
-    if (id >=0 && id < sauces.length){
-        let sauceToRemove = sauces[id];
-        sauces.splice(id,1);
-        res.json({id:sauceToRemove});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
-}
-
-exports.createSauce = function (req,res){
-    let name = req.body.name;
-    let price = req.body.price;
-    if (name==undefined || price == undefined){
-        res.status(404).json({"error":"invalid body format", "valid_keys":["name","price"]});
-    }
-    else{
-        let sauce = new Sauce(name,price);
-        sauces.push(sauce);
-        res.json({id:sauce});
-    }
+    Sauce.destroy({ where: { sauce_id: req.params.sauce_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message}))
 }
