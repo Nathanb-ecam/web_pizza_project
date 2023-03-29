@@ -2,10 +2,8 @@ let User = require('../models/userModel');
 
 
 
-
-
 exports.listUsers = function (req,res){
-    User.findAll({ attributes: ['name', 'password','points']} )
+    User.findAll({ attributes: ['user_id','name', 'password','points']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -15,15 +13,30 @@ exports.listUsers = function (req,res){
     })
 }
 
+exports.searchUser = function(req,res){
+    User.findOne({ where: { user_id: req.params.user_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
+exports.createUser = async function(req,res){
+    let user = User.build({ name: req.body.name, password: req.body.password,points:req.body.points })
+    // save object in DB
+    await user.save()
+        .then(data => {
+            res.json(data);
+    })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
+}
 
 
-
-
-
-
-
-
-
+exports.deleteUser = function (req,res){
+    User.destroy({ where: { user_id: req.params.user_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message}))
+}
 
 
 
@@ -45,18 +58,7 @@ exports.listUsers = function (req,res){
 
 
 
-// exports.deleteUser = function (req,res){
-//     let id = req.params.user_id;
-    
-//     if (id >=0 && id < users.length){
-//         let userToRemove = users[id];
-//         users.splice(id,1);
-//         res.json({id:userToRemove});
-//     }
-//     else{
-//         res.status(404).json({"message":"id out or range"});
-//     }
-// }
+
 
 // // at route /user
 // exports.createUser = function (req,res){

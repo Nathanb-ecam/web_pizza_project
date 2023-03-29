@@ -1,6 +1,5 @@
 let Pizza = require('../models/pizzaModel');
 
-let pizzas = [new Pizza("Margarita",12),new Pizza("bbq",10),new Pizza("Hawai",11),new Pizza("Ham",11),new Pizza("Calzone",14),new Pizza("Salmon",11)]
 
 exports.pizzaDetails = function (req,res){
     let id  =req.params.pizza_id;
