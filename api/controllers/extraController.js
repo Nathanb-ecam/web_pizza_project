@@ -1,46 +1,38 @@
-let Extra = require('../models/extraModel');
+let Extra = require('../models/ExtraModel');
 
-let extras = [new Extra("frites",2),new Extra("fromage",3),new Extra("salade",5)]
 
-exports.extraDetails = function (req,res){
-    let extra_id  =req.params.extra_id;
-    if (extra_id >=0 && extra_id < extras.length){
-        res.json({extra_id:extras[extra_id]});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
-    
-    
+exports.listExtra = function (req,res){
+    Extra.findAll({ attributes: ['extra_id','extra_name', 'price']} )
+        .then(data => {
+            // console.log(data.toJSON());
+            res.json(data);
+        })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
-exports.extraList = function (req,res){
-    res.json({"extras":extras});
+exports.searchExtra = function(req,res){
+    Extra.findOne({ where: { extra_id: req.params.extra_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
+exports.createExtra = async function(req,res){
+    let extra = Extra.build({ extra_name: req.body.extra_name, price: req.body.price  })
+    // save object in DB
+    await extra.save()
+        .then(data => {
+            res.json(data);
+    })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
 
 exports.deleteExtra = function (req,res){
-    let id = req.params.extra_id;
-    
-    if (id >=0 && id < extras.length){
-        let extraToRemove = extras[id];
-        extras.splice(id,1);
-        res.json({id:extraToRemove});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
-}
-
-exports.createExtra = function (req,res){
-    let name = req.body.name;
-    let price = req.body.price;
-    if (name==undefined || price == undefined){
-        res.status(404).json({"error":"invalid body format", "valid_keys":["name","price"]});
-    }
-    else{
-        let extra = new Extra(name,price);
-        extras.push(extra);
-        res.json({id:extra});
-    }
+    Extra.destroy({ where: { extra_id: req.params.extra_id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message}))
 }
