@@ -58,9 +58,9 @@ router.post('/menu',menuController.createMenu);
 
 // user
 router.get('/users/',userController.listUsers);
-router.get('/user/:user_id',userController.userDetails);
-router.delete('/user/:user_id',userController.deleteUser);
-router.post('/user',userController.createUser);
-router.post('/users',userController.authentifyUser);
+// router.get('/user/:user_id',userController.userDetails);
+// router.delete('/user/:user_id',userController.deleteUser);
+// router.post('/user',userController.createUser);
+// router.post('/users',userController.authentifyUser);
 
 module.exports = router;

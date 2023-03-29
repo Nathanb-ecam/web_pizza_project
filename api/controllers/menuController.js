@@ -11,9 +11,7 @@ exports.menuDetails = function (req,res){
     if (id >=0 && id < menus.length){
         res.json({id:menus[id]});
     }
-    else{
-
-        
+    else{        
         res.status(404).json({"message":"id out or range"});
     }
 }

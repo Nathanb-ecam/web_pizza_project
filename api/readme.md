@@ -1,4 +1,4 @@
 npx nodemon .\server.js
 
 
-npm i express
+npm i express mysql2 sequelize
