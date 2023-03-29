@@ -10,7 +10,7 @@ const Extra = sequelize.define('extra', {
                 primaryKey: true
             },
             extra_name: { type: Sequelize.STRING, allowNull: false },
-            price: { type: Sequelize.INTEGER, allowNull: false }
+            price: { type: Sequelize.FLOAT, allowNull: false }
 })
 
 module.exports = Extra;

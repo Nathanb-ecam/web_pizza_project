@@ -10,7 +10,7 @@ const Sauce = sequelize.define('sauce', {
                 primaryKey: true
             },
             sauce_name: { type: Sequelize.STRING, allowNull: false },
-            price: { type: Sequelize.INTEGER, allowNull: false }
+            price: { type: Sequelize.FLOAT, allowNull: false }
 })
 
 module.exports = Sauce;

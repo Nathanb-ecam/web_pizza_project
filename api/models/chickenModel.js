@@ -10,7 +10,7 @@ const Chicken = sequelize.define('chicken', {
                 primaryKey: true
             },
             chicken_name: { type: Sequelize.STRING, allowNull: false },
-            price: { type: Sequelize.INTEGER, allowNull: false }
+            price: { type: Sequelize.FLOAT, allowNull: false }
 })
 
 module.exports = Chicken;
