@@ -16,22 +16,22 @@ router.get('/',(req,res)=>{
 });
 
 //chicken
-router.get('/chicken/:chicken_id',chickenController.chickenDetails);
-router.get('/chickens/',chickenController.chickenList);
+router.get('/chicken/:chicken_id',chickenController.searchChicken);
+router.get('/chickens/',chickenController.listChicken);
 router.delete('/chicken/:chicken_id',chickenController.deleteChicken);
 router.post('/chicken',chickenController.createChicken);
 
 
 //sauce
-router.get('/sauce/:sauce_id',sauceController.sauceDetails);
-router.get('/sauces/',sauceController.sauceList);
+router.get('/sauce/:sauce_id',sauceController.searchSauce);
+router.get('/sauces/',sauceController.listSauce);
 router.delete('/sauce/:sauce_id',sauceController.deleteSauce);
 router.post('/sauce',sauceController.createSauce);
 
 
 //extra
-router.get('/extra/:extra_id',extraController.extraDetails);
-router.get('/extras/',extraController.extraList);
+router.get('/extra/:extra_id',extraController.searchExtra);
+router.get('/extras/',extraController.listExtra);
 router.delete('/extra/:extra_id',extraController.deleteExtra);
 router.post('/extra',extraController.createExtra);
 
