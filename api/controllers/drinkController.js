@@ -3,7 +3,7 @@ let Drink = require('../models/drinkModel');
 
 
 exports.listDrinks = function (req,res){
-    Drink.findAll({ attributes: ['drink_id','drink_name', 'price']} )
+    Drink.findAll({ attributes: ['id','name', 'price']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);

@@ -3,7 +3,7 @@ let Pizza = require('../models/pizzaModel');
 
 
 exports.listPizzas = function (req,res){
-    Pizza.findAll({ attributes: ['pizza_id','pizza_name', 'price']} )
+    Pizza.findAll({ attributes: ['id','name', 'price']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
