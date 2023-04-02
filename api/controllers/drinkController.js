@@ -14,13 +14,13 @@ exports.listDrinks = function (req,res){
 }
 
 exports.searchDrink = function(req,res){
-    Drink.findOne({ where: { drink_id: req.params.drink_id } })
+    Drink.findOne({ where: { id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
 }
 
 exports.createDrink = async function(req,res){
-    let drink = Drink.build({ drink_name: req.body.drink_name,price:req.body.price })
+    let drink = Drink.build({ name: req.body.name,price:req.body.price })
     // save object in DB
     await drink.save()
         .then(data => {
@@ -33,7 +33,7 @@ exports.createDrink = async function(req,res){
 
 
 exports.deleteDrink = function (req,res){
-    Drink.destroy({ where: { drink_id: req.params.drink_id } })
+    Drink.destroy({ where: { id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
 }
