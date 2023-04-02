@@ -1,8 +1,8 @@
-let Extra = require('../models/ExtraModel');
+let Extra = require('../models/extraModel');
 
 
 exports.listExtra = function (req,res){
-    Extra.findAll({ attributes: ['extra_id','extra_name', 'price']} )
+    Extra.findAll({ attributes: ['id','name', 'price']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -13,13 +13,13 @@ exports.listExtra = function (req,res){
 }
 
 exports.searchExtra = function(req,res){
-    Extra.findOne({ where: { extra_id: req.params.extra_id } })
+    Extra.findOne({ where: { id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
 }
 
 exports.createExtra = async function(req,res){
-    let extra = Extra.build({ extra_name: req.body.extra_name, price: req.body.price  })
+    let extra = Extra.build({ name: req.body.name, price: req.body.price  })
     // save object in DB
     await extra.save()
         .then(data => {
@@ -32,7 +32,7 @@ exports.createExtra = async function(req,res){
 
 
 exports.deleteExtra = function (req,res){
-    Extra.destroy({ where: { extra_id: req.params.extra_id } })
+    Extra.destroy({ where: { id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
 }

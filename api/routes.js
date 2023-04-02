@@ -11,34 +11,28 @@ let menuController = require('./controllers/menuController');
 let userController = require('./controllers/userController');
 
 
-
 //chicken
-router.get('/chicken/:id',chickenController.chickenDetails);
-router.get('/chickens/',chickenController.chickenList);
+router.get('/chicken/:id',chickenController.searchChicken);
+router.get('/chickens/',chickenController.listChicken);
 router.delete('/chicken/:id',chickenController.deleteChicken);
-router.post('/chicken',chickenController.createChicken);
+router.post('/chickens',chickenController.createChicken);
 
 
 //sauce
-router.get('/sauce/:id',sauceController.sauceDetails);
-router.get('/sauces/',sauceController.sauceList);
+router.get('/sauce/:id',sauceController.searchSauce);
+router.get('/sauces/',sauceController.listSauce);
 router.delete('/sauce/:id',sauceController.deleteSauce);
-router.post('/sauce',sauceController.createSauce);
+router.post('/sauces',sauceController.createSauce);
 
 
 //extra
-router.get('/extra/:id',extraController.extraDetails);
-router.get('/extras/',extraController.extraList);
+router.get('/extra/:id',extraController.searchExtra);
+router.get('/extras/',extraController.listExtra);
 router.delete('/extra/:id',extraController.deleteExtra);
-router.post('/extra',extraController.createExtra);
+router.post('/extras',extraController.createExtra);
 
 
 
-
-
-
-
-// updated routes
 // user
 router.get('/users/',userController.listUsers);
 router.get('/user/:id',userController.searchUser);

@@ -1,8 +1,8 @@
-let Sauce = require('../models/SauceModel');
+let Sauce = require('../models/sauceModel');
 
 
 exports.listSauce = function (req,res){
-    Sauce.findAll({ attributes: ['sauce_id','sauce_name', 'price']} )
+    Sauce.findAll({ attributes: ['id','name', 'price']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -13,13 +13,13 @@ exports.listSauce = function (req,res){
 }
 
 exports.searchSauce = function(req,res){
-    Sauce.findOne({ where: { sauce_id: req.params.sauce_id } })
+    Sauce.findOne({ where: { id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
 }
 
 exports.createSauce = async function(req,res){
-    let sauce = Sauce.build({ sauce_name: req.body.sauce_name, price: req.body.price  })
+    let sauce = Sauce.build({ name: req.body.name, price: req.body.price  })
     // save object in DB
     await sauce.save()
         .then(data => {
@@ -32,7 +32,7 @@ exports.createSauce = async function(req,res){
 
 
 exports.deleteSauce = function (req,res){
-    Sauce.destroy({ where: { sauce_id: req.params.sauce_id } })
+    Sauce.destroy({ where: { id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
 }
