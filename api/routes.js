@@ -11,56 +11,57 @@ let menuController = require('./controllers/menuController');
 let userController = require('./controllers/userController');
 
 
-router.get('/',(req,res)=>{
-    res.json({"message":"Welcome to pizza hut"});
-});
 
 //chicken
-router.get('/chicken/:chicken_id',chickenController.searchChicken);
-router.get('/chickens/',chickenController.listChicken);
-router.delete('/chicken/:chicken_id',chickenController.deleteChicken);
+router.get('/chicken/:id',chickenController.chickenDetails);
+router.get('/chickens/',chickenController.chickenList);
+router.delete('/chicken/:id',chickenController.deleteChicken);
 router.post('/chicken',chickenController.createChicken);
 
 
 //sauce
-router.get('/sauce/:sauce_id',sauceController.searchSauce);
-router.get('/sauces/',sauceController.listSauce);
-router.delete('/sauce/:sauce_id',sauceController.deleteSauce);
+router.get('/sauce/:id',sauceController.sauceDetails);
+router.get('/sauces/',sauceController.sauceList);
+router.delete('/sauce/:id',sauceController.deleteSauce);
 router.post('/sauce',sauceController.createSauce);
 
 
 //extra
-router.get('/extra/:extra_id',extraController.searchExtra);
-router.get('/extras/',extraController.listExtra);
-router.delete('/extra/:extra_id',extraController.deleteExtra);
+router.get('/extra/:id',extraController.extraDetails);
+router.get('/extras/',extraController.extraList);
+router.delete('/extra/:id',extraController.deleteExtra);
 router.post('/extra',extraController.createExtra);
 
-// pizza
-router.get('/pizza/:pizza_id',pizzaController.pizzaDetails);
-router.get('/pizzas/',pizzaController.pizzaList);
-router.delete('/pizza/:pizza_id',pizzaController.deletePizza);
-router.post('/pizza',pizzaController.createPizza);
 
 
+
+
+
+
+// updated routes
+// user
+router.get('/users/',userController.listUsers);
+router.get('/user/:id',userController.searchUser);
+router.delete('/user/:id',userController.deleteUser);
+router.post('/users',userController.createUser);
 
 // drink
-router.get('/drink/:drink_id',drinkController.drinkDetails);
-router.get('/drinks/',drinkController.drinkList);
-router.delete('/drink/:drink_id',drinkController.deleteDrink);
-router.post('/drink',drinkController.createDrink);
-
+router.get('/drinks/',drinkController.listDrinks);
+router.get('/drink/:id',drinkController.searchDrink);
+router.delete('/drink/:id',drinkController.deleteDrink);
+router.post('/drinks',drinkController.createDrink);
 
 // menu
 router.get('/menus/',menuController.listMenus);
-router.get('/menu/:menu_id',menuController.menuDetails);
-router.delete('/menu/:menu_id',menuController.deleteMenu);
-router.post('/menu',menuController.createMenu);
+router.get('/menu/:id',menuController.searchMenu);
+router.delete('/menu/:id',menuController.deleteMenu);
+router.post('/menus',menuController.createMenu);
 
-// user
-router.get('/users/',userController.listUsers);
-// router.get('/user/:user_id',userController.userDetails);
-// router.delete('/user/:user_id',userController.deleteUser);
-// router.post('/user',userController.createUser);
-// router.post('/users',userController.authentifyUser);
+// pizza
+router.get('/pizzas/',pizzaController.listPizzas);
+router.get('/pizza/:id',pizzaController.searchPizza);
+router.delete('/pizza/:id',pizzaController.deletePizza);
+router.post('/pizzas',pizzaController.createPizza);
+
 
 module.exports = router;

@@ -1,46 +1,41 @@
 let Pizza = require('../models/pizzaModel');
 
-let pizzas = [new Pizza("Margarita",12),new Pizza("bbq",10),new Pizza("Hawai",11),new Pizza("Ham",11),new Pizza("Calzone",14),new Pizza("Salmon",11)]
 
-exports.pizzaDetails = function (req,res){
-    let id  =req.params.pizza_id;
-    if (id >=0 && id < pizzas.length){
-        res.json({id:pizzas[id]});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
+
+exports.listPizzas = function (req,res){
+    Pizza.findAll({ attributes: ['id','name', 'price']} )
+        .then(data => {
+            // console.log(data.toJSON());
+            res.json(data);
+        })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
-exports.pizzaList = function (req,res){
-    res.json({"pizzas":pizzas});
+exports.searchPizza = function(req,res){
+    Pizza.findOne({ where: { id: req.params.id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
+exports.createPizza = async function(req,res){
+    let pizza = Pizza.build({ name: req.body.name,price:req.body.price })
+    // save object in DB
+    await pizza.save()
+        .then(data => {
+            res.json(data);
+    })
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+    })
 }
 
 
 exports.deletePizza = function (req,res){
-    let id = req.params.pizza_id;
-    
-    if (id >=0 && id < pizzas.length){
-        let pizzaToRemove = pizzas[id];
-        pizzas.splice(id,1);
-        res.json({id:pizzaToRemove});
-    }
-    else{
-        res.status(404).json({"message":"id out or range"});
-    }
+    Pizza.destroy({ where: { id: req.params.id } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message}))
 }
 
-exports.createPizza = function (req,res){
-    let id = pizzas.length;
-    let name = req.body.name;
-    let price = req.body.price;
-    if (name==undefined || price == undefined){
-        res.status(404).json({"error":"invalid body format", "valid_keys":["name","price"]});
-    }
-    else{
-        let pizza = new Pizza(name,price);
-        pizzas.push(pizza);
-        res.json({id:pizza});
-    }
 
-}
