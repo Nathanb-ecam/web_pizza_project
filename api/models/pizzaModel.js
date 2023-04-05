@@ -10,7 +10,8 @@ const Pizza = sequelize.define('pizza', {
                 primaryKey: true
             },
             name: { type: Sequelize.STRING, allowNull: false },
-            price: { type: Sequelize.FLOAT, allowNull: false }
+            price: { type: Sequelize.FLOAT, allowNull: false },
+            desc: { type: Sequelize.STRING, allowNull: true },
             
 })
 

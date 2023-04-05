@@ -2,7 +2,7 @@ let Extra = require('../models/extraModel');
 
 
 exports.listExtra = function (req,res){
-    Extra.findAll({ attributes: ['id','name', 'price']} )
+    Extra.findAll({ attributes: ['id','name', 'price','desc']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -19,7 +19,7 @@ exports.searchExtra = function(req,res){
 }
 
 exports.createExtra = async function(req,res){
-    let extra = Extra.build({ name: req.body.name, price: req.body.price  })
+    let extra = Extra.build({ name: req.body.name, price: req.body.price ,desc:req.body.desc })
     // save object in DB
     await extra.save()
         .then(data => {
