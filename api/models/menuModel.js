@@ -9,7 +9,7 @@ const Menu = sequelize.define('menu', {
                 allowNull: false,
                 primaryKey: true
             },
-            menu_name: { type: Sequelize.STRING, allowNull: false },
+            menu_name: { type: Sequelize.STRING, allowNull: true },
             idSauce: { type: Sequelize.INTEGER, allowNull: true },
             idChicken: { type: Sequelize.INTEGER, allowNull: true },
             idPizza: { type: Sequelize.INTEGER, allowNull: true },

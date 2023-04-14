@@ -6,6 +6,7 @@ let pizzaController = require('./controllers/pizzaController');
 let chickenController = require('./controllers/chickenController');
 let sauceController = require('./controllers/sauceController');
 let extraController = require('./controllers/extraController');
+let orderextraController = require('./controllers/orderExtraController');
 let drinkController = require('./controllers/drinkController');
 let menuController = require('./controllers/menuController');
 let userController = require('./controllers/userController');
@@ -31,6 +32,11 @@ router.get('/extras/',extraController.listExtra);
 router.delete('/extra/:id',extraController.deleteExtra);
 router.post('/extras',extraController.createExtra);
 
+//order extra
+router.get('/orderextra/:id',orderextraController.searchOrderExtra);
+router.get('/orderextras/',orderextraController.listOrderExtra);
+router.delete('/orderextra/:id',orderextraController.deleteOrderExtra);
+router.post('/orderextras',orderextraController.createOrderExtra);
 
 
 // user
