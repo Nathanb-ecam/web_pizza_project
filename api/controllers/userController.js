@@ -1,6 +1,11 @@
 let User = require('../models/userModel');
 
-
+exports.searchUserByCredentials = async function(req,res){
+    // console.log("ByCred",req.body.password)
+    let data = await User.findOne({where:{name:req.body.name,password:req.body.password}})
+    req.data = data
+    }
+    
 
 exports.listUsers = function (req,res){
     User.findAll({ attributes: ['user_id','name', 'password','points']} )

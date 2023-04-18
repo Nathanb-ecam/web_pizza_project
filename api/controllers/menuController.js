@@ -33,7 +33,7 @@ exports.createMenu = async function(req,res){
 
 
 exports.deleteMenu = function (req,res){
-    Menu.destroy({ where: { menu_id: req.params.menu_id } })
+    Menu.destroy({ where: { menu_id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
 }
