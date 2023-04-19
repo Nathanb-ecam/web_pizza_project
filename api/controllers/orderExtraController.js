@@ -2,7 +2,7 @@ let OrderExtra = require('../models/orderExtraModel');
 
 
 exports.listOrderExtra = function (req,res){
-    OrderExtra.findAll({ attributes: ['idOrderExtra','idOrder', 'quantityExtra','idExtra']} )
+    OrderExtra.findAll({ attributes: ['idOrderExtra','idOrder','idExtraDrink','idExtraPizza','idExtraChicken','idExtraSauce']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -19,7 +19,7 @@ exports.searchOrderExtra = function(req,res){
 }
 
 exports.createOrderExtra = async function(req,res){
-    let orderextra = OrderExtra.build({ idOrder: req.body.idOrder, quantityExtra: req.body.quantityExtra ,idExtra:req.body.idExtra })
+    let orderextra = OrderExtra.build({ idOrder: req.body.idOrder,idExtraDrink:req.body.idExtraDrink,idExtraPizza:req.body.idExtraPizza,idExtraChicken:req.body.idExtraChicken,idExtraSauce:req.body.idExtraSauce })
     // save object in DB
     await orderextra.save()
         .then(data => {
