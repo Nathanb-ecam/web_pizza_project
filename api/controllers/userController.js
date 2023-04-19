@@ -1,9 +1,12 @@
 let User = require('../models/userModel');
 
 exports.searchUserByCredentials = async function(req,res){
-    // console.log("ByCred",req.body.password)
-    let data = await User.findOne({where:{name:req.body.name,password:req.body.password}})
-    req.data = data
+    await User.findOne({where:{name:req.body.name,password:req.body.password}} )
+    .then(data =>
+        req.data= data)
+    .catch(err => {
+        res.status(500).json({ message: err.message })
+})
     }
     
 

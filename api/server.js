@@ -1,8 +1,9 @@
 var express = require('express');
 let app = express();
-
+let cors = require('cors');
 // app.use(express.urlencoded())
 app.use(express.json());
+app.use(cors());
 
 //import database
 const sequelize = require('./db.js');
