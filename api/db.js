@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     host: secret.host_name,
     // specify port for linux instance
-    //port:63336
+    port:63336
 }
 );
 module.exports = sequelize;
