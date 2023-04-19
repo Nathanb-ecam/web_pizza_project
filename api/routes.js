@@ -75,16 +75,16 @@ router.delete('/pizza/:id',authController.isAuthorized,pizzaController.deletePiz
 router.post('/pizzas',authController.isAuthorized,pizzaController.createPizza);
 
 // order
-router.get('/orders/',orderController.listOrder);
-router.get('/order/:id',orderController.searchOrder);
-router.delete('/order/:id',orderController.deleteOrder);
-router.post('/orders',orderController.createOrder );
+router.get('/orders/',authController.isAuthorized,orderController.listOrder);
+router.get('/order/:id',authController.isAuthorized,orderController.searchOrder);
+router.delete('/order/:id',authController.isAuthorized,orderController.deleteOrder);
+router.post('/orders',authController.isAuthorized,orderController.createOrder );
 
 // element order
-router.get('/orderelements/',elementOrderController.listElementOrder);
-router.get('/orderelement/:id',elementOrderController.searchElementOrder);
-router.delete('/orderelement/:id',elementOrderController.deleteElementOrder);
-router.post('/orderelements',elementOrderController.createElementOrder);
+router.get('/orderelements/',authController.isAuthorized,elementOrderController.listElementOrder);
+router.get('/orderelement/:id',authController.isAuthorized,elementOrderController.searchElementOrder);
+router.delete('/orderelement/:id',authController.isAuthorized,elementOrderController.deleteElementOrder);
+router.post('/orderelements',authController.isAuthorized,elementOrderController.createElementOrder);
 
 
 module.exports = router;
