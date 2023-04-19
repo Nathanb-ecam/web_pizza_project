@@ -10,8 +10,10 @@ const OrderExtra = sequelize.define('orderextra', {
                 primaryKey: true
             },
             idOrder: { type: Sequelize.INTEGER, allowNull: false,foreignKey:true },
-            quantityExtra: { type: Sequelize.FLOAT, allowNull: false },
-            idExtra: { type: Sequelize.INTEGER, allowNull: false,foreignKey:true  },
+            idExtraDrink:{type:Sequelize.INTEGER,allowNull:true,foreignKey:true},
+            idExtraPizza:{type:Sequelize.INTEGER,allowNull:true,foreignKey:true},
+            idExtraChicken:{type:Sequelize.INTEGER,allowNull:true,foreignKey:true},
+            idExtraSauce:{type:Sequelize.INTEGER,allowNull:true,foreignKey:true},
 })
 
 module.exports = OrderExtra;
