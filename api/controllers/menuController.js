@@ -14,7 +14,7 @@ exports.listMenus = function (req,res){
 }
 
 exports.searchMenu = function(req,res){
-    Menu.findOne({ where: { menu_id: req.params.menu_id } })
+    Menu.findOne({ where: { menu_id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
 }
