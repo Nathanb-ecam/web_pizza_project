@@ -9,6 +9,8 @@ let extraController = require('./controllers/extraController');
 let orderextraController = require('./controllers/orderExtraController');
 let drinkController = require('./controllers/drinkController');
 let menuController = require('./controllers/menuController');
+let orderController = require('./controllers/orderController');
+let elementOrderController = require('./controllers/elementOrderController');
 let userController = require('./controllers/userController');
 let authController = require('./controllers/authController');
 
@@ -71,6 +73,18 @@ router.get('/pizzas/',pizzaController.listPizzas);
 router.get('/pizza/:id',pizzaController.searchPizza);
 router.delete('/pizza/:id',authController.isAuthorized,pizzaController.deletePizza);
 router.post('/pizzas',authController.isAuthorized,pizzaController.createPizza);
+
+// order
+router.get('/orders/',orderController.listOrder);
+router.get('/order/:id',orderController.searchOrder);
+router.delete('/order/:id',orderController.deleteOrder);
+router.post('/orders',orderController.createOrder );
+
+// element order
+router.get('/orderelements/',elementOrderController.listElementOrder);
+router.get('/orderelement/:id',elementOrderController.searchElementOrder);
+router.delete('/orderelement/:id',elementOrderController.deleteElementOrder);
+router.post('/orderelements',elementOrderController.createElementOrder);
 
 
 module.exports = router;
