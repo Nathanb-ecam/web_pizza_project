@@ -13,7 +13,7 @@ exports.generateToken = async function (req, res, next) {
             expiresIn: jwtExpirySeconds,
         })  
         //res.cookie("token", token, { httpOnly: true, secure:true,maxAge: jwtExpirySeconds * 1000 });
-        res.json({"token" : token, "maxAge": jwtExpirySeconds * 1000 });
+        res.json({"token" : token, "maxAge": jwtExpirySeconds * 1000 ,"isAdmin":req.data.isAdmin});
     }
     else{
         res.status(404).json({message:"User not valid"})
