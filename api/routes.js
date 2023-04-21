@@ -37,11 +37,11 @@ router.delete('/sauce/:id',authController.isAuthorized,sauceController.deleteSau
 router.post('/sauces',authController.isAuthorized,sauceController.createSauce);
 
 
-//extra
-router.get('/extra/:id',extraController.searchExtra);
-router.get('/extras/',extraController.listExtra);
-router.delete('/extra/:id',authController.isAuthorized,extraController.deleteExtra);
-router.post('/extras',authController.isAuthorized,extraController.createExtra);
+//extra : not working with desserts in app's, extra's can only be Pizza,Drink,CHicken or Sauce
+// router.get('/extra/:id',extraController.searchExtra);
+// router.get('/extras/',extraController.listExtra);
+// router.delete('/extra/:id',authController.isAuthorized,extraController.deleteExtra);
+// router.post('/extras',authController.isAuthorized,extraController.createExtra);
 
 //order extra
 router.get('/orderextra/:id',orderextraController.searchOrderExtra);
