@@ -11,7 +11,7 @@ exports.searchUserByCredentials = async function(req,res){
     
 
 exports.listUsers = function (req,res){
-    User.findAll({ attributes: ['user_id','name', 'password','points']} )
+    User.findAll({ attributes: ['user_id','name', 'password','isAdmin','points']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -28,7 +28,7 @@ exports.searchUser = function(req,res){
 }
 
 exports.createUser = async function(req,res){
-    let user = User.build({ name: req.body.name, password: req.body.password,points:req.body.points })
+    let user = User.build({ name: req.body.name, password: req.body.password,isAdmin:req.body.isAdmin,points:req.body.points })
     // save object in DB
     await user.save()
         .then(data => {

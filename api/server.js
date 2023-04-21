@@ -1,6 +1,6 @@
 var express = require('express');
 let app = express();
-const PORT = process.env.NODE_PORT |80
+const PORT = process.env.NODE_PORT |8080
 
 let cors = require('cors');
 // app.use(express.urlencoded())
@@ -19,5 +19,5 @@ app.use('/api',routes);
 
 
 app.listen(PORT,()=>{
-    console.log("Serveur démarré ...");
+    console.log("Serveur démarré sur le port "+PORT)
 })
