@@ -11,6 +11,7 @@ const Chicken = sequelize.define('chicken', {
             },
             name: { type: Sequelize.STRING, allowNull: false },
             price: { type: Sequelize.FLOAT, allowNull: false },
+            image: { type: Sequelize.BLOB, allowNull: true },
             desc: { type: Sequelize.STRING, allowNull: true },
 })
 

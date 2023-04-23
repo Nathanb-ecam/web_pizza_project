@@ -2,7 +2,7 @@ let Sauce = require('../models/sauceModel');
 
 
 exports.listSauce = function (req,res){
-    Sauce.findAll({ attributes: ['id','name', 'price','desc']} )
+    Sauce.findAll({ attributes: ['id','name', 'price','image','desc']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -19,7 +19,7 @@ exports.searchSauce = function(req,res){
 }
 
 exports.createSauce = async function(req,res){
-    let sauce = Sauce.build({ name: req.body.name, price: req.body.price ,desc:req.body.desc })
+    let sauce = Sauce.build({ name: req.body.name, price: req.body.price ,image:req.body.image,desc:req.body.desc })
     // save object in DB
     await sauce.save()
         .then(data => {

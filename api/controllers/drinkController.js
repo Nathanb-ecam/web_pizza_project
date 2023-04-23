@@ -3,7 +3,7 @@ let Drink = require('../models/drinkModel');
 
 
 exports.listDrinks = function (req,res){
-    Drink.findAll({ attributes: ['id','name', 'price','desc']} )
+    Drink.findAll({ attributes: ['id','name', 'price','image','desc']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -20,7 +20,7 @@ exports.searchDrink = function(req,res){
 }
 
 exports.createDrink = async function(req,res){
-    let drink = Drink.build({ name: req.body.name,price:req.body.price,desc:req.body.desc })
+    let drink = Drink.build({ name: req.body.name,price:req.body.price,image:req.body.image,desc:req.body.desc })
     // save object in DB
     await drink.save()
         .then(data => {

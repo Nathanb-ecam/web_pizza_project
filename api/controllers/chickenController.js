@@ -2,7 +2,7 @@ let Chicken = require('../models/chickenModel');
 
 
 exports.listChicken = function (req,res){
-    Chicken.findAll({ attributes: ['id','name', 'price','desc']} )
+    Chicken.findAll({ attributes: ['id','name', 'price','image','desc']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -19,7 +19,7 @@ exports.searchChicken = function(req,res){
 }
 
 exports.createChicken = async function(req,res){
-    let chicken = Chicken.build({ name: req.body.name, price: req.body.price,desc:req.body.desc  })
+    let chicken = Chicken.build({ name: req.body.name, price: req.body.price,image:req.body.image,desc:req.body.desc  })
     // save object in DB
     await chicken.save()
         .then(data => {
