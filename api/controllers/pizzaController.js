@@ -38,4 +38,11 @@ exports.deletePizza = function (req,res){
         .catch(err=>res.status(500).json({message:err.message}))
 }
 
+exports.updatePizza = function(req,res){
+    let updateValues = { name: req.body.name,price:req.body.price,desc:req.body.desc };
+    Pizza.update(updateValues, { where: { id: req.params.id } })
+        .then(data => res.json(data)) 
+        .catch(err=>res.status(500).json( {message:err.message}))
+}
+
 
