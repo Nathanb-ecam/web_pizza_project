@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db.js')
 
-
-const Pizza = sequelize.define('pizza', {
+// let Menu = require('./menuModel.js')
+const Pizza = sequelize.define('Pizza', {
             id: {
                 type: Sequelize.INTEGER,
                 autoIncrement: true,
@@ -14,6 +14,8 @@ const Pizza = sequelize.define('pizza', {
             desc: { type: Sequelize.STRING, allowNull: true },
             
 })
+
+// Pizza.belongsTo(Menu);
 
 module.exports = Pizza;
 

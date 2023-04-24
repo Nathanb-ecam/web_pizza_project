@@ -65,6 +65,7 @@ router.put('/drink/:id',authController.isAuthorized,drinkController.updateDrink)
 
 // menu
 router.get('/menus/',authController.isAuthorized,menuController.listMenus);
+router.get('/menusExplicit/',authController.isAuthorized,menuController.listMenusExplicit);
 router.get('/menu/:id',authController.isAuthorized,menuController.searchMenu);
 router.delete('/menu/:id',authController.isAuthorized,menuController.deleteMenu);
 router.post('/menus',authController.isAuthorized,menuController.createMenu);

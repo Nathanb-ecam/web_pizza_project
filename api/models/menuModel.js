@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db.js')
 
-
+// let Pizza = require('./pizzaModel.js')
 const Menu = sequelize.define('menu', {
             menu_id: {
                 type: Sequelize.INTEGER,
@@ -17,5 +17,6 @@ const Menu = sequelize.define('menu', {
             
 })
 
+// Menu.hasOne(Pizza,{foreignKey:'idPizza'});
 module.exports = Menu;
 
