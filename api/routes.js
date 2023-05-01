@@ -69,6 +69,7 @@ router.get('/menusExplicit/',authController.isAuthorized,menuController.listMenu
 router.get('/menu/:id',authController.isAuthorized,menuController.searchMenu);
 router.delete('/menu/:id',authController.isAuthorized,menuController.deleteMenu);
 router.post('/menus',authController.isAuthorized,menuController.createMenu);
+router.put('/menu/:id',authController.isAuthorized,menuController.modifyMenu);
 
 // pizza
 router.get('/pizzas/',pizzaController.listPizzas);
