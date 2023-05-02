@@ -9,7 +9,7 @@ const Order = sequelize.define('order', {
                 allowNull: false,
                 primaryKey: true
             },
-            idClient: { type: Sequelize.INTEGER, allowNull: false, foreignKey:true}
+            user_id: { type: Sequelize.INTEGER, allowNull: false, foreignKey:true}
             
 })
 

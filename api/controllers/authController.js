@@ -7,13 +7,13 @@ exports.generateToken = async function (req, res, next) {
     if (req.data){
         const jwtKey = "my_secret_key"
         const jwtExpirySeconds = 3000
-        let payload = { name: req.body.username,password:req.body.password };
+        let payload = { name: req.data.name,password:req.data.password };
         let token = jwt.sign(payload, jwtKey, {
             algorithm: "HS256",
             expiresIn: jwtExpirySeconds,
         })  
         //res.cookie("token", token, { httpOnly: true, secure:true,maxAge: jwtExpirySeconds * 1000 });
-        res.json({"token" : token, "maxAge": jwtExpirySeconds * 1000 ,"isAdmin":req.data.isAdmin});
+        res.json({"token" : token, "maxAge": jwtExpirySeconds * 1000 ,"isAdmin":req.data.isAdmin,"user_id":req.data.user_id});
     }
     else{
         res.status(404).json({message:"User not valid"})

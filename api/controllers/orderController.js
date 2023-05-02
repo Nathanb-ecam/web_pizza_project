@@ -18,7 +18,7 @@ exports.searchOrder = function(req,res){
 }
 
 exports.createOrder = async function(req,res){
-    let order = Order.build({ idClient: req.body.idClient })
+    let order = Order.build({ user_id: req.body.user_id })
     // save object in DB
     await order.save()
         .then(data => {
