@@ -53,7 +53,7 @@ exports.createMenu = async function(req,res){
     // save object in DB
     await menu.save()
         .then(data => {
-            res.json(data);
+            res.json(data.menu_id);
     })
         .catch(err => {
             res.status(500).json({ message: err.message })

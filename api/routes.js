@@ -86,7 +86,7 @@ router.put('/pizza/:id',authController.isAuthorized,pizzaController.updatePizza)
 router.get('/orders/',authController.isAuthorized,orderController.listOrder);
 router.get('/order/:id',authController.isAuthorized,orderController.searchOrder);
 router.delete('/order/:id',authController.isAuthorized,orderController.deleteOrder);
-router.post('/orders',authController.isAuthorized,orderController.createOrder );
+router.post('/orders/:user_id',authController.isAuthorized,orderController.createOrder );
 
 // element order
 router.get('/orderelements/',authController.isAuthorized,elementOrderController.listElementOrder);
