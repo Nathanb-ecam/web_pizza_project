@@ -18,6 +18,12 @@ exports.searchSauce = function(req,res){
         .catch(err=>res.status(500).json({message:err.message})) 
 }
 
+exports.searchSauceByName = function(req,res){
+    Sauce.findOne({ where: { name: req.params.name } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
 exports.createSauce = async function(req,res){
     let sauce = Sauce.build({ name: req.body.name, price: req.body.price ,desc:req.body.desc })
     // save object in DB

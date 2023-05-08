@@ -19,6 +19,12 @@ exports.searchPizza = function(req,res){
         .catch(err=>res.status(500).json({message:err.message})) 
 }
 
+exports.searchPizzaByName = function(req,res){
+    Pizza.findOne({ where: { name: req.params.name } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
+
 exports.createPizza = async function(req,res){
     let pizza = Pizza.build({ name: req.body.name,price:req.body.price,desc:req.body.desc })
     // save object in DB

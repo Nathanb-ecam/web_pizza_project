@@ -26,6 +26,7 @@ router.post('/login', authController.generateToken)
 //chicken
 router.get('/chicken/:id',chickenController.searchChicken);
 router.get('/chickens/',chickenController.listChicken);
+router.get('/chicken/name/:name',chickenController.searchChickenByName);
 router.delete('/chicken/:id',authController.isAuthorized,chickenController.deleteChicken);
 router.post('/chickens',authController.isAuthorized,chickenController.createChicken);
 
@@ -33,6 +34,7 @@ router.post('/chickens',authController.isAuthorized,chickenController.createChic
 //sauce
 router.get('/sauce/:id',sauceController.searchSauce);
 router.get('/sauces/',sauceController.listSauce);
+router.get('/sauce/name/:name',sauceController.searchSauceByName);
 router.delete('/sauce/:id',authController.isAuthorized,sauceController.deleteSauce);
 router.post('/sauces',authController.isAuthorized,sauceController.createSauce);
 
@@ -59,6 +61,7 @@ router.post('/users',authController.isAuthorized,userController.createUser);
 // drink
 router.get('/drinks/',drinkController.listDrinks);
 router.get('/drink/:id',drinkController.searchDrink);
+router.get('/drink/name/:name',drinkController.searchDrinkByName);
 router.delete('/drink/:id',authController.isAuthorized,drinkController.deleteDrink);
 router.post('/drinks',authController.isAuthorized,drinkController.createDrink);
 router.put('/drink/:id',authController.isAuthorized,drinkController.updateDrink);
@@ -74,6 +77,7 @@ router.put('/menu/:id',authController.isAuthorized,menuController.modifyMenu);
 // pizza
 router.get('/pizzas/',pizzaController.listPizzas);
 router.get('/pizza/:id',pizzaController.searchPizza);
+router.get('/pizza/name/:name',pizzaController.searchPizzaByName);
 router.delete('/pizza/:id',authController.isAuthorized,pizzaController.deletePizza);
 router.post('/pizzas',authController.isAuthorized,pizzaController.createPizza);
 router.put('/pizza/:id',authController.isAuthorized,pizzaController.updatePizza);

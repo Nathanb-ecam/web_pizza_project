@@ -18,6 +18,11 @@ exports.searchDrink = function(req,res){
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
 }
+exports.searchDrinkByName = function(req,res){
+    Drink.findOne({ where: { name: req.params.name } })
+        .then(data=>res.json(data))
+        .catch(err=>res.status(500).json({message:err.message})) 
+}
 
 exports.createDrink = async function(req,res){
     let drink = Drink.build({ name: req.body.name,price:req.body.price,desc:req.body.desc })

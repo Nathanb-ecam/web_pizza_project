@@ -8,9 +8,9 @@ const sequelize = new Sequelize(
     secret.password, {
     dialect: 'mysql',
     host: secret.host_name,
-    // specify port for linux instance
-    port:3306,
     // specify port for local instance
+    port:3306,
+    // specify port for linx instance
     //port:63336
 }
 );
