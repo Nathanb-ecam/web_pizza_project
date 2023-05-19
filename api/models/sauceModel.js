@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const sequelize = require('../db.js')
 
 
-const Sauce = sequelize.define('Sauce', {
+const Sauce = sequelize.define('sauce', {
             id: {
                 type: Sequelize.INTEGER,
                 autoIncrement: true,
