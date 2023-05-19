@@ -5,7 +5,6 @@ let router = express.Router();
 let pizzaController = require('./controllers/pizzaController');
 let chickenController = require('./controllers/chickenController');
 let sauceController = require('./controllers/sauceController');
-let extraController = require('./controllers/extraController');
 let orderextraController = require('./controllers/orderExtraController');
 let drinkController = require('./controllers/drinkController');
 let menuController = require('./controllers/menuController');
@@ -39,11 +38,6 @@ router.delete('/sauce/:id',authController.isAuthorized,sauceController.deleteSau
 router.post('/sauces',authController.isAuthorized,sauceController.createSauce);
 
 
-//extra : not working with desserts in app's, extra's can only be Pizza,Drink,CHicken or Sauce
-// router.get('/extra/:id',extraController.searchExtra);
-// router.get('/extras/',extraController.listExtra);
-// router.delete('/extra/:id',authController.isAuthorized,extraController.deleteExtra);
-// router.post('/extras',authController.isAuthorized,extraController.createExtra);
 
 //order extra
 router.get('/orderextra/:id',authController.isAuthorized,orderextraController.searchOrderExtra);
