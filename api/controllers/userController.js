@@ -41,7 +41,7 @@ exports.createUser = async function(req,res){
 
 
 exports.deleteUser = function (req,res){
-    User.destroy({ where: { user_id: req.params.user_id } })
+    User.destroy({ where: { user_id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
 }
