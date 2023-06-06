@@ -1,6 +1,7 @@
 var express = require('express');
 let app = express();
-const PORT = process.env.NODE_PORT |80
+// const PORT = process.env.NODE_PORT |80
+const PORT =3001;
 
 let cors = require('cors');
 // app.use(express.urlencoded())
