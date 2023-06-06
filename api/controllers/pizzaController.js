@@ -44,6 +44,27 @@ exports.deletePizza = function (req,res){
         .catch(err=>res.status(500).json({message:err.message}))
 }
 
+exports.deletePizzaDependencies = function (req,res){
+    let id = req.params.id;
+    if(id){
+        OrderExtra.destroy({where: {idExtraPizza: id}})
+        .then(ElementOrder.destroy({where: {},include: [{model: Menus,where: {idPizza: id}}]})
+            .then(Menu.destroy({where: {idPizza: id}})
+                .then(Pizza.destroy({where: {id: id}}))
+                .catch(err=>res.status(500).json( {message:err.message}))
+            )
+            .catch(err=>res.status(500).json( {message:err.message}))
+        )
+        .catch(err=>res.status(500).json( {message:err.message}))
+    }
+    else{
+        res.status(500).json( {message:"error while trying to delete pizza dependencies"})
+    }
+        
+}
+
+
+
 exports.updatePizza = function(req,res){
     let updateValues = { name: req.body.name,price:req.body.price,desc:req.body.desc };
     Pizza.update(updateValues, { where: { id: req.params.id } })
