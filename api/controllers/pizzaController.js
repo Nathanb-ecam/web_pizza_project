@@ -51,14 +51,10 @@ exports.deletePizzaDependencies = function (req,res){
     let id = req.params.id;
     if(id){
         OrderExtra.destroy({where: {idExtraPizza: id}})
-        .then(ElementOrder.destroy({where: {},include: [{model: Menu,where: {idPizza: id}}]})
-            .then(Menu.destroy({where: {idPizza: id}})
-                .then(Pizza.destroy({where: {id: id}}))
-                .catch(err=>res.status(500).json( {message:err.message}))
-            )
-            .catch(err=>res.status(500).json( {message:err.message}))
-        )
-        .catch(err=>res.status(500).json( {message:err.message}))
+        ElementOrder.destroy({where: {},include: [{model: Menu,where: {idPizza: id}}]})
+        Menu.destroy({where: {idPizza: id}})
+        Pizza.destroy({where: {id: id}})
+        res.json(1);
     }
     else{
         res.status(500).json( {message:"error while trying to delete pizza dependencies"})
