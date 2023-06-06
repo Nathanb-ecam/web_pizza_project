@@ -73,6 +73,7 @@ router.get('/pizzas/',pizzaController.listPizzas);
 router.get('/pizza/:id',pizzaController.searchPizza);
 router.get('/pizza/name/:name',pizzaController.searchPizzaByName);
 router.delete('/pizza/:id',authController.isAuthorized,pizzaController.deletePizza);
+router.delete('/pizzaDependencies/:id',authController.isAuthorized,pizzaController.deletePizzaDependencies);
 router.post('/pizzas',authController.isAuthorized,pizzaController.createPizza);
 router.put('/pizza/:id',authController.isAuthorized,pizzaController.updatePizza);
 
