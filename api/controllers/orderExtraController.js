@@ -13,9 +13,15 @@ exports.listOrderExtra = function (req,res){
 }
 
 exports.searchOrderExtra = function(req,res){
-    OrderExtra.findOne({ where: { idOrderExtra: req.params.id } })
+    const id = req.params.id;
+    if(!isNaN(id)){
+        OrderExtra.findOne({ where: { idOrderExtra: id } })
         .then(data=>res.json(data))
-        .catch(err=>res.status(500).json({message:err.message})) 
+        .catch(err=>res.status(500).json({message:err.message}))
+    }else{
+        res.status(400).json({message:"Parameter 'id' must be a number"})
+    }
+     
 }
 
 exports.createOrderExtra = async function(req,res){
@@ -32,7 +38,13 @@ exports.createOrderExtra = async function(req,res){
 
 
 exports.deleteOrderExtra = function (req,res){
-    OrderExtra.destroy({ where: { idOrderExtra: req.params.id } })
+    const id = req.params.id;
+    if(!isNaN(id)){
+        OrderExtra.destroy({ where: { idOrderExtra: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
+    }else{
+        res.status(400).json({message:"Parameter 'id' must be a number"})
+    }
+    
 }
