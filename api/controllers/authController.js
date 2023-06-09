@@ -18,7 +18,7 @@ exports.generateToken = async function (req, res, next) {
     }
     else{
         res.status(404).json({message:"User not valid"})
-        console.log("");
+        // console.log("");
     }
 
 }
@@ -38,6 +38,6 @@ exports.isAuthorized = async function (req, res, next) {
     }
     else{
         res.status(404).json({"error":"Not authorized"})
-        console.log("problem in isAuthorized"); 
+        // console.log("problem in isAuthorized"); 
     }
 }
