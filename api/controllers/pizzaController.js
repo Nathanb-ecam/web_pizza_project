@@ -42,7 +42,7 @@ exports.searchPizzaByName = function(req,res){
 
 exports.createPizza = async function(req,res){
     const {name,price, desc} = req.body;
-    console.log(name,price,desc)
+    // console.log(name,price,desc)
     if(name=== null || name === undefined || price=== null || price ===undefined){
         res.status(400).json({message:"Please provide all fields required : name and price"})
     }else{
