@@ -47,10 +47,10 @@ router.post('/orderextras',authController.isAuthorized,orderextraController.crea
 
 
 // user
-router.get('/users/',userController.listUsers);
+router.get('/users/',authController.isAuthorized,userController.listUsers);
 router.get('/user/:id',authController.isAuthorized,userController.searchUser);
-router.delete('/user/:id',userController.deleteUser);
-router.post('/users',userController.createUser);
+router.delete('/user/:id',authController.isAuthorized,userController.deleteUser);
+router.post('/users',authController.isAuthorized,userController.createUser);
 
 // drink
 router.get('/drinks/',drinkController.listDrinks);
