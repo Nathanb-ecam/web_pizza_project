@@ -7,7 +7,7 @@ exports.generateToken = async function (req, res, next) {
     // console.log("req.data",req.data)
     if (req.data){
         const jwtKey = api_secret.my_secret_key;
-        const jwtExpirySeconds = 300;
+        const jwtExpirySeconds = 3000;
         let payload = { name: req.data.name,password:req.data.password };
         let token = jwt.sign(payload, jwtKey, {
             algorithm: "HS256",
