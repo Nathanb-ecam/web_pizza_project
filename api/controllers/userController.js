@@ -22,9 +22,15 @@ exports.listUsers = function (req,res){
 }
 
 exports.searchUser = function(req,res){
-    User.findOne({ where: { user_id: req.params.user_id } })
+    const id = req.params.id;
+    if(!isNaN(id)){
+        User.findOne({ where: { user_id: req.params.user_id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
+    }else{
+        res.status(400).json({message:"Parameter 'id' must be a number"})
+    }
+    
 }
 
 exports.createUser = async function(req,res){
@@ -41,9 +47,15 @@ exports.createUser = async function(req,res){
 
 
 exports.deleteUser = function (req,res){
-    User.destroy({ where: { user_id: req.params.id } })
+    const id = req.params.id;
+    if(!isNaN(id)){
+        User.destroy({ where: { user_id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
+    }else{
+        res.status(400).json({message:"Parameter 'id' must be a number"})
+    }
+    
 }
 
 

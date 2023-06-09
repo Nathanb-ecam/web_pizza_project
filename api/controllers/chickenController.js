@@ -46,9 +46,7 @@ exports.createChicken = async function(req,res){
         let chicken = Chicken.build({ name: name, price: price,desc:desc  })
         // save object in DB
         await chicken.save()
-            .then(data => {
-                res.json(data);
-        })
+            .then(data =>res.json(data))
             .catch(err => {
                 res.status(500).json({ message: err.message })
         })

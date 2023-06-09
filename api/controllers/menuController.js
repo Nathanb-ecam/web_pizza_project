@@ -41,9 +41,15 @@ exports.listMenusExplicit = function (req,res){
 }
 
 exports.searchMenu = function(req,res){
-    Menu.findOne({ where: { menu_id: req.params.id } })
+    const id = req.params.id;
+    if(isNaN(id)){
+        Menu.findOne({ where: { menu_id: id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message})) 
+    }else{
+        res.status(400).json({message:"Parameter 'id' must be a number"})
+    }
+    
 }
 
 
@@ -62,17 +68,23 @@ exports.createMenu = async function(req,res){
 
 exports.modifyMenu = async function (req,res){
     try {
+        const id = req.params.id;
         const { idSauce, idChicken, idPizza, idDrink } = req.body;
         
-        const menu = await Menu.findOne({ where: {menu_id: req.params.id } });
+        if(!isNaN(id)){
+            const menu = await Menu.findOne({ where: {menu_id: id } });
     
-        if (!menu) {
-          return res.status(404).json({ message: 'Menu not found' });
-        }
-    
-        await menu.update({ idSauce, idChicken, idPizza, idDrink });
+            if (!menu) {
+              return res.status(404).json({ message: 'Menu not found' });
+            }
         
-        res.status(200).json(menu);
+            await menu.update({ idSauce, idChicken, idPizza, idDrink });
+            
+            res.status(200).json(menu);
+        }else{
+            res.status(400).json({message:"Parameter 'id' must be a number"})
+        }
+        
       } 
     catch (error) {
         console.error(error);
@@ -82,9 +94,15 @@ exports.modifyMenu = async function (req,res){
 
 
 exports.deleteMenu = function (req,res){
-    Menu.destroy({ where: { menu_id: req.params.id } })
+    const id = req.params.id;
+    if(!isNaN(id)){
+        Menu.destroy({ where: { menu_id: req.params.id } })
         .then(data=>res.json(data))
         .catch(err=>res.status(500).json({message:err.message}))
+    }else{
+        res.status(400).json({message:"Parameter 'id' must be a number"})
+    }
+    
 }
 
 
