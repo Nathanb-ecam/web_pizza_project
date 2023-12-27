@@ -2,11 +2,11 @@ let Pizza = require('../models/pizzaModel');
 let OrderExtra = require('../models/orderExtraModel');
 let ElementOrder = require('../models/elementOrderModel');
 let Menu = require('../models/menuModel');
-
+const server = require('../server.js')
 
 
 exports.listPizzas = function (req,res){
-    Pizza.findAll({ attributes: ['id','name', 'price','desc']} )
+    Pizza.findAll({ attributes: ['id','name', 'price','desc','image_path']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -41,16 +41,42 @@ exports.searchPizzaByName = function(req,res){
 }
 
 exports.createPizza = async function(req,res){
+    // const {name,price, desc} = req.body;
+    // // console.log(name,price,desc)
+    // if(name=== null || name === undefined || price=== null || price ===undefined){
+    //     res.status(400).json({message:"Please provide all fields required : name and price"})
+    // }else{
+    //     let pizza = Pizza.build({ name: name,price:price,desc:desc })
+    //     // save object in DB
+    //     await pizza.save()
+    //         .then(data => res.json(data))
+    //         .catch(err => res.status(500).json({ message: err.message }))
+    // }
     const {name,price, desc} = req.body;
+
+    if (!name || !price) {
+        return res.status(400).json({ message: 'Please provide name and price for the pizza.' });
+      }
+    
+      // Check if a file was uploaded
+      if (!req.file) {
+        return res.status(400).json({ message: 'Please upload an image for the pizza.' });
+      }
     // console.log(name,price,desc)
-    if(name=== null || name === undefined || price=== null || price ===undefined){
-        res.status(400).json({message:"Please provide all fields required : name and price"})
-    }else{
-        let pizza = Pizza.build({ name: name,price:price,desc:desc })
-        // save object in DB
-        await pizza.save()
-            .then(data => res.json(data))
-            .catch(err => res.status(500).json({ message: err.message }))
+    const imagePath = req.file.path; // Get the file path from multer
+
+    try {
+        // Create a new Pizza instance with image_path
+        const pizza = await Pizza.create({
+        name: name,
+        price: price,
+        desc: desc,
+        image_path: imagePath,
+        });
+        res.json(pizza);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 
 }

@@ -4,7 +4,7 @@ let api_secret = require('../api_secret_key.json');
 
 exports.generateToken = async function (req, res, next) {
     await userController.searchUserByCredentials(req,res);
-    // console.log("req.data",req.data)
+    console.log("req.data",req.data)
     if (req.data){
         const jwtKey = api_secret.my_secret_key;
         const jwtExpirySeconds = 200;

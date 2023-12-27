@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
-
+const multer = require('multer')
+const path = require('path');
 
 let pizzaController = require('./controllers/pizzaController');
 let chickenController = require('./controllers/chickenController');
@@ -12,6 +13,22 @@ let orderController = require('./controllers/orderController');
 let elementOrderController = require('./controllers/elementOrderController');
 let userController = require('./controllers/userController');
 let authController = require('./controllers/authController');
+
+
+
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Specify the directory where uploaded files will be stored
+    },
+    filename: (req, file, cb) => {
+      const fileName = Date.now() + path.extname(file.originalname);
+      cb(null, fileName);
+    },
+});
+  
+const upload = multer({ storage: storage });
+
 
 
 //authentification
@@ -74,7 +91,7 @@ router.get('/pizza/:id',pizzaController.searchPizza);
 router.get('/pizza/name/:name',pizzaController.searchPizzaByName);
 router.delete('/pizza/:id',authController.isAuthorized,pizzaController.deletePizza);
 router.delete('/pizzaDependencies/:id',authController.isAuthorized,pizzaController.deletePizzaDependencies);
-router.post('/pizzas',authController.isAuthorized,pizzaController.createPizza);
+router.post('/pizzas',upload.single('file'),pizzaController.createPizza);
 router.put('/pizza/:id',authController.isAuthorized,pizzaController.updatePizza);
 
 // order
