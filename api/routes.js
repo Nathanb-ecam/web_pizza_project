@@ -74,7 +74,7 @@ router.get('/drinks/',drinkController.listDrinks);
 router.get('/drink/:id',drinkController.searchDrink);
 router.get('/drink/name/:name',drinkController.searchDrinkByName);
 router.delete('/drink/:id',authController.isAuthorized,drinkController.deleteDrink);
-router.post('/drinks',authController.isAuthorized,drinkController.createDrink);
+router.post('/drinks',upload.single('file'),drinkController.createDrink);
 router.put('/drink/:id',authController.isAuthorized,drinkController.updateDrink);
 
 // menu
@@ -91,7 +91,7 @@ router.get('/pizza/:id',pizzaController.searchPizza);
 router.get('/pizza/name/:name',pizzaController.searchPizzaByName);
 router.delete('/pizza/:id',authController.isAuthorized,pizzaController.deletePizza);
 router.delete('/pizzaDependencies/:id',authController.isAuthorized,pizzaController.deletePizzaDependencies);
-router.post('/pizzas',upload.single('file'),pizzaController.createPizza);
+router.post('/pizzas',upload.single('file'),authController.isAuthorized,pizzaController.createPizza);
 router.put('/pizza/:id',authController.isAuthorized,pizzaController.updatePizza);
 
 // order

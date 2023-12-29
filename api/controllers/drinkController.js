@@ -3,7 +3,7 @@ let Drink = require('../models/drinkModel');
 
 
 exports.listDrinks = function (req,res){
-    Drink.findAll({ attributes: ['id','name', 'price','desc']} )
+    Drink.findAll({ attributes: ['id','name', 'price','desc','image_path']} )
         .then(data => {
             // console.log(data.toJSON());
             res.json(data);
@@ -39,19 +39,30 @@ exports.searchDrinkByName = function(req,res){
 
 exports.createDrink = async function(req,res){
     const {name,price, desc} = req.body;
+
+    if (!name || !price) {
+        return res.status(400).json({ message: 'Please provide name and price for the drink.' });
+      }
+    
+      // Check if a file was uploaded
+      if (!req.file) {
+        return res.status(400).json({ message: 'Please upload an image for the drink.' });
+      }
     // console.log(name,price,desc)
-    if(name=== null || name === undefined || price=== null || price ===undefined){
-        res.status(400).json({message:"Please provide all fields required : name and price"})
-    }else{
-        let drink = Drink.build({ name: name,price:price,desc:desc })
-        // save object in DB
-        await drink.save()
-            .then(data => {
-                res.json(data);
-        })
-            .catch(err => {
-                res.status(500).json({ message: err.message })
-        })
+    const imagePath = req.file.path; // Get the file path from multer
+
+    try {
+        // Create a new drink instance with image_path
+        const drink = await Drink.create({
+        name: name,
+        price: price,
+        desc: desc,
+        image_path: imagePath,
+        });
+        res.json(drink);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 
 }
